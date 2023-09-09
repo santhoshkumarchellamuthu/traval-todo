@@ -7,45 +7,40 @@ import React, { useState } from "react";
 
 function App() {
   const [items, setItems] = useState([]);
-  const [originalData, setOriginalData] = useState([]);
-  const [sortedItems, setSortedItems] = useState([]);
+  const [originalData, setOriginalData] = useState([]); //in this place we peplace the setitem copy the orgin data va find panna mudiyathu because whwnever we set data it will change the data
 
   let manageData = (item) => {
     setItems((items) => [...items, item]);
-    setOriginalData((data) => [...data, item]); // Store original data
+    setOriginalData((data) => [...data, item]);
   };
-
+  // sort method
   let selectSort = (value) => {
     if (value === "1") {
-      setSortedItems([...originalData]);
+      setItems([...originalData]); // original data copy of data va pass panni irukom so ithu  original data va affect pannathu
     } else {
       let packedSort = originalData.filter((arr) => arr.packed === true);
-      setSortedItems([...packedSort]);
+      setItems([...packedSort]);
     }
   };
-
+  // this func is for delete overall array
   let clearItem = () => {
     setItems([]);
     setOriginalData([]);
-    setSortedItems([]);
   };
-
+  // delete separate values
   let deleteItem = (id) => {
     setOriginalData((data) => data.filter((value) => value.id !== id));
     setItems((items) => items.filter((value) => value.id !== id));
-    setSortedItems((sortedData) =>
-      sortedData.filter((value) => value.id !== id)
-    );
   };
-  //
+  // for check box click
   let handleCheckboxClick = (id) => {
     let updatedItems = [...items];
     const itemIndex = updatedItems.findIndex((item) => item.id === id);
-    //
+    // intex value va find panni athoda packed status not value va change pantrom
     if (itemIndex !== -1) {
       updatedItems[itemIndex].packed = !updatedItems[itemIndex].packed;
       setItems(updatedItems);
-      setSortedItems(updatedItems);
+      setOriginalData(updatedItems);
     }
   };
 
@@ -54,7 +49,7 @@ function App() {
       <Header />
       <Form addDataitems={manageData} />
       <List
-        item={sortedItems.length > 0 ? sortedItems : originalData}
+        item={items}
         clearArray={clearItem}
         handleCheckbox={handleCheckboxClick}
         del={deleteItem}

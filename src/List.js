@@ -30,8 +30,7 @@ const Item = ({ props, key, clickAble, deleteItem }) => {
       <input
         type="checkbox"
         className="check"
-        onClick={() => clickAble(props.id)} // Use the index prop
-      />
+        onClick={() => clickAble(props.id)}       />
 
       <span className={props.packed ? "line" : ""}>
         {props.numbers}

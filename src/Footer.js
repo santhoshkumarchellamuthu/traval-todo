@@ -8,7 +8,7 @@ const Footer = ({ allItems }) => {
   return (
     <div className="foot-cont">
       {percentage === 100 ? (
-        <p>you got everytnig ready to go 🏃🏻</p>
+        <p>you got everything ready to go 🏃🏻</p>
       ) : (
         <p>{`you have ${overAllItems} items on your list,and you already packed ${allpacked}(${percentage}%)`}</p>
       )}
